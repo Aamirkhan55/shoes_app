@@ -2,6 +2,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_app/utils/constants.dart';
+import 'package:shoes_app/view/home/home_screen.dart';
 
 class NavigatorBar extends StatefulWidget {
   const NavigatorBar({super.key});
@@ -16,6 +17,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
   final PageController _pageController = PageController();
 
   final List<Widget> _screen = [
+    const HomeScreen(),
     Container(
       color: Colors.amber,
     ),
@@ -31,8 +33,11 @@ class _NavigatorBarState extends State<NavigatorBar> {
     setState(() {
       _selectIndex = index;
     });
-    _pageController.animateToPage(_selectIndex,
-        duration: const Duration(milliseconds: 200), curve: Curves.linear);
+    _pageController.animateToPage(
+      _selectIndex,
+      duration: const Duration(milliseconds: 200), 
+      curve: Curves.linear,
+      );
   }
 
   @override
