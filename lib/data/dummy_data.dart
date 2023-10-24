@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_app/model/shoe_model.dart';
+import 'package:shoes_app/model/user_status.dart';
 
-import '../models/models.dart';
+
 
 final List<ShoeModel> availableShoes = [
   ShoeModel(
