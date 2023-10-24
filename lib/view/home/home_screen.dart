@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_app/data/dummy_data.dart';
 import 'package:shoes_app/model/shoe_model.dart';
+import 'package:shoes_app/theme/custom_app_theme.dart';
 import 'package:shoes_app/utils/constants.dart';
 import 'package:shoes_app/view/home/components/appBar.dart';
 
@@ -66,10 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         }),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: size.width * 0.89,
                   height: size.height * 0.4,
-                  color: Colors.teal,
                   child: ListView.builder(
                     scrollDirection:  Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
@@ -79,17 +80,41 @@ class _HomeScreenState extends State<HomeScreen> {
                       return GestureDetector(
                         onTap: () {},
                         child: Container(
-                          margin: EdgeInsets.all(size.height * 0.01),
-                          width: size.width / 1.5,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.005,
+                            vertical: size.height * 0.01,
+                          ),
+                          width: size.width / 1.6,
                           child: Stack(
                             children: [
                               Container(
                                 width: size.width/1.81,
                                 decoration:  BoxDecoration(
                                   color: model.modelColor,
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
-                              )
+                              ),
+                             Positioned(
+                                left: 10,
+                                child: Row(
+                                  children: [
+                                  Text(
+                                    model.name,
+                                    style: AppThemes.homeProductName,
+                                    ),
+                                   SizedBox(
+                                    width: size.width * 0.3,
+                                  ),
+                                  IconButton(
+                                    onPressed: () {}, 
+                                    icon: const Icon(
+                                      CupertinoIcons.heart,
+                                      color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                                )
                             ],
                           ),
                         ),
