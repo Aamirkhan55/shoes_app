@@ -5,6 +5,7 @@ import 'package:shoes_app/data/dummy_data.dart';
 import 'package:shoes_app/model/shoe_model.dart';
 import 'package:shoes_app/theme/custom_app_theme.dart';
 import 'package:shoes_app/utils/constants.dart';
+import 'package:shoes_app/view/detail/detail_screen.dart';
 import 'package:shoes_app/view/home/components/appBar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,88 +42,96 @@ class _HomeScreenState extends State<HomeScreen> {
 
   SizedBox _bottomSideCategory(Size size) {
     return SizedBox(
-            width: size.width,
-            height: size.height * 0.28,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemCount: availableShoes.length,
-                itemBuilder: (context, index) {
-                  ShoeModel model = availableShoes[index];
-                  return Container(
-                    margin: const EdgeInsets.all(10),
-                    width: size.width * 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Positioned(
-                          top: 0,
-                          left: 4,
-                          child: Container(
-                            width: size.width / 13,
-                            height: size.height / 10,
-                            color: Colors.red,
-                            child: const RotatedBox(
-                              quarterTurns: -1,
-                              child: Center(
-                                child: Text(
-                                  'NEW',
-                                  style: AppThemes.homeGridNewText,
-                                ),
-                              ),
+      width: size.width,
+      height: size.height * 0.28,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          itemCount: availableShoes.length,
+          itemBuilder: (context, index) {
+            ShoeModel model = availableShoes[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DetailScreen()));
+              },
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                width: size.width * 0.5,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 4,
+                      child: Container(
+                        width: size.width / 13,
+                        height: size.height / 10,
+                        color: Colors.red,
+                        child: const RotatedBox(
+                          quarterTurns: -1,
+                          child: Center(
+                            child: Text(
+                              'NEW',
+                              style: AppThemes.homeGridNewText,
                             ),
                           ),
                         ),
-                        Positioned(
-                          top: 0,
-                          right: 1,
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.favorite_border,
-                                color: AppConstantsColor.darkTextColor,
-                              )),
-                        ),
-                        Positioned(
-                            top: 45,
-                            child: RotationTransition(
-                              turns: const AlwaysStoppedAnimation(-20 / 360),
-                              child: Hero(
-                                  tag: model.model,
-                                  child: Image(
-                                    image: AssetImage(model.imgAddress),
-                                    width: size.width * 0.45,
-                                  )),
-                            )),
-                        Positioned(
-                            bottom: 30,
-                            left: 45,
-                            child: SizedBox(
-                              width: size.width / 4,
-                              height: size.height / 42,
-                              child: FittedBox(
-                                child: Text(
-                                  '${model.name} ${model.name}',
-                                  style: AppThemes.homeGridNameAndModel,
-                                ),
-                              ),
-                            )),
-                        Positioned(
-                          bottom: 10,
-                          child: Text(
-                            "\$${model.price.toStringAsFixed(2)}",
-                            style: AppThemes.homeGridPrice,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  );
-                }),
-          );
+                    Positioned(
+                      top: 0,
+                      right: 1,
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.favorite_border,
+                            color: AppConstantsColor.darkTextColor,
+                          )),
+                    ),
+                    Positioned(
+                        top: 45,
+                        child: RotationTransition(
+                          turns: const AlwaysStoppedAnimation(-20 / 360),
+                          child: Hero(
+                              tag: model.model,
+                              child: Image(
+                                image: AssetImage(model.imgAddress),
+                                width: size.width * 0.45,
+                              )),
+                        )),
+                    Positioned(
+                        bottom: 30,
+                        left: 45,
+                        child: SizedBox(
+                          width: size.width / 4,
+                          height: size.height / 42,
+                          child: FittedBox(
+                            child: Text(
+                              '${model.name} ${model.name}',
+                              style: AppThemes.homeGridNameAndModel,
+                            ),
+                          ),
+                        )),
+                    Positioned(
+                      bottom: 10,
+                      child: Text(
+                        "\$${model.price.toStringAsFixed(2)}",
+                        style: AppThemes.homeGridPrice,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+    );
   }
 
   Padding _moreTextIcon() {
@@ -195,7 +204,12 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 ShoeModel model = availableShoes[index];
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DetailScreen()));
+                  },
                   child: Container(
                     margin: EdgeInsets.symmetric(
                       horizontal: size.width * 0.005,
