@@ -32,15 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             _mainShoeListView(size),
             _moreTextIcon(),
-            Container(
+            SizedBox(
               width: size.width,
               height: size.height * 0.28,
-              color: Colors.teal,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
                 itemCount: availableShoes.length,
                 itemBuilder: (context, index) {
+                  ShoeModel model = availableShoes[index];
                   return Container(
                     margin: const EdgeInsets.all(10),
                     width: size.width * 0.5,
@@ -76,7 +76,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: AppConstantsColor.darkTextColor,
                               )
                             ),
+                          ), 
+                        Positioned(
+                          top: 40,
+                          child: RotationTransition(
+                            turns: const AlwaysStoppedAnimation(-20 / 360),
+                            child: Hero(
+                              tag: model.model, 
+                              child: Image(
+                                image: AssetImage(model.imgAddress),
+                                width: size.width * 0.45,
+                                )
+                              ),
+                            )
+                          ), 
+                         Positioned(
+                          bottom: 35,
+                          left: 45,
+                          child: SizedBox(
+                            width: size.width / 4,
+                            height: size.height / 42,
+                            child: FittedBox(
+                              child: Text(
+                                '${model.name} ${model.name}',
+                                style: AppThemes.homeGridNameAndModel,
+                                ),
+                            ),
                           )
+                          )    
                       ],
                     ),
                   );
