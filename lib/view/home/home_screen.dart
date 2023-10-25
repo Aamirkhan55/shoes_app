@@ -32,10 +32,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             _mainShoeListView(size),
             _moreTextIcon(),
-            SizedBox(
-              width: size.width,
-              height: size.height * 0.28,
-              child: ListView.builder(
+            _bottomSideCategory(size)
+          ],
+        ),
+      ),
+    );
+  }
+
+  SizedBox _bottomSideCategory(Size size) {
+    return SizedBox(
+            width: size.width,
+            height: size.height * 0.28,
+            child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
                 itemCount: availableShoes.length,
@@ -64,222 +72,210 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Text(
                                   'NEW',
                                   style: AppThemes.homeGridNewText,
-                                  ),
+                                ),
                               ),
-                              ),
+                            ),
                           ),
                         ),
                         Positioned(
                           top: 0,
                           right: 1,
                           child: IconButton(
-                            onPressed: (){}, 
-                            icon: const Icon(
-                              Icons.favorite_border,
-                              color: AppConstantsColor.darkTextColor,
-                              )
-                            ),
-                          ), 
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.favorite_border,
+                                color: AppConstantsColor.darkTextColor,
+                              )),
+                        ),
                         Positioned(
-                          top: 45,
-                          child: RotationTransition(
-                            turns: const AlwaysStoppedAnimation(-20 / 360),
-                            child: Hero(
-                              tag: model.model, 
-                              child: Image(
-                                image: AssetImage(model.imgAddress),
-                                width: size.width * 0.45,
-                                )
-                              ),
-                            )
-                          ), 
-                         Positioned(
-                          bottom: 30,
-                          left: 45,
-                          child: SizedBox(
-                            width: size.width / 4,
-                            height: size.height / 42,
-                            child: FittedBox(
-                              child: Text(
-                                '${model.name} ${model.name}',
-                                style: AppThemes.homeGridNameAndModel,
+                            top: 45,
+                            child: RotationTransition(
+                              turns: const AlwaysStoppedAnimation(-20 / 360),
+                              child: Hero(
+                                  tag: model.model,
+                                  child: Image(
+                                    image: AssetImage(model.imgAddress),
+                                    width: size.width * 0.45,
+                                  )),
+                            )),
+                        Positioned(
+                            bottom: 30,
+                            left: 45,
+                            child: SizedBox(
+                              width: size.width / 4,
+                              height: size.height / 42,
+                              child: FittedBox(
+                                child: Text(
+                                  '${model.name} ${model.name}',
+                                  style: AppThemes.homeGridNameAndModel,
                                 ),
-                            ),
-                          )
-                          ),
+                              ),
+                            )),
                         Positioned(
                           bottom: 10,
                           child: Text(
                             "\$${model.price.toStringAsFixed(2)}",
                             style: AppThemes.homeGridPrice,
-                            ),
-                          ),      
+                          ),
+                        ),
                       ],
                     ),
                   );
                 }),
-            )
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   Padding _moreTextIcon() {
     return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'More',
-                  style: AppThemes.homeMoreText,
-                  ),
-                IconButton(
-                  onPressed: () {}, 
-                  icon: const Icon(
-                    CupertinoIcons.arrow_right,
-                    size: 30,
-                    )
-                  )  
-              ],
-            ),
-          );
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'More',
+            style: AppThemes.homeMoreText,
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                CupertinoIcons.arrow_right,
+                size: 30,
+              ))
+        ],
+      ),
+    );
   }
 
   Row _mainShoeListView(Size size) {
     return Row(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: size.width * 0.02),
-                width: size.width / 16,
-                height: size.height / 2.4,
-                child: RotatedBox(
-                  quarterTurns: -1,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: featured.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedIndexOfFeature = index;
-                            });
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: size.width * 0.05),
-                            child: Text(featured[index],
-                                style: TextStyle(
-                                  fontSize: _selectedIndexOfFeature == index
-                                      ? 21
-                                      : 18,
-                                  color: _selectedIndexOfFeature == index
-                                      ? AppConstantsColor.darkTextColor
-                                      : AppConstantsColor.unSelectedTextColor,
-                                  fontWeight:_selectedIndexOfFeature == index
-                                      ? FontWeight.w600
-                                      : FontWeight.w400,
-                                )),
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+          width: size.width / 16,
+          height: size.height / 2.4,
+          child: RotatedBox(
+            quarterTurns: -1,
+            child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: featured.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedIndexOfFeature = index;
+                      });
+                    },
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                      child: Text(featured[index],
+                          style: TextStyle(
+                            fontSize:
+                                _selectedIndexOfFeature == index ? 21 : 18,
+                            color: _selectedIndexOfFeature == index
+                                ? AppConstantsColor.darkTextColor
+                                : AppConstantsColor.unSelectedTextColor,
+                            fontWeight: _selectedIndexOfFeature == index
+                                ? FontWeight.w600
+                                : FontWeight.w400,
+                          )),
+                    ),
+                  );
+                }),
+          ),
+        ),
+        SizedBox(
+          width: size.width * 0.89,
+          height: size.height * 0.4,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              itemCount: availableShoes.length,
+              itemBuilder: (context, index) {
+                ShoeModel model = availableShoes[index];
+                return GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: size.width * 0.005,
+                      vertical: size.height * 0.01,
+                    ),
+                    width: size.width / 1.6,
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: size.width / 1.81,
+                          decoration: BoxDecoration(
+                            color: model.modelColor,
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                        );
-                      }),
-                ),
-              ),
-              SizedBox(
-                width: size.width * 0.89,
-                height: size.height * 0.4,
-                child: ListView.builder(
-                  scrollDirection:  Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: availableShoes.length,
-                  itemBuilder: (context, index) {
-                    ShoeModel model = availableShoes[index];
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.005,
-                          vertical: size.height * 0.01,
                         ),
-                        width: size.width / 1.6,
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: size.width/1.81,
-                              decoration:  BoxDecoration(
-                                color: model.modelColor,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                           Positioned(
-                              left: 10,
-                              child: Row(
-                                children: [
+                        Positioned(
+                            left: 10,
+                            child: Row(
+                              children: [
                                 Text(
                                   model.name,
                                   style: AppThemes.homeProductName,
-                                  ),
-                                 SizedBox(
+                                ),
+                                SizedBox(
                                   width: size.width * 0.3,
                                 ),
                                 IconButton(
-                                  onPressed: () {}, 
+                                  onPressed: () {},
                                   icon: const Icon(
                                     CupertinoIcons.heart,
                                     color: Colors.white,
-                                    ),
                                   ),
-                                ],
-                              )
-                              ),
-                            Positioned(
-                              top: 40,
-                              left: 10,
-                              child: Text(
-                                model.model,
-                                style: AppThemes.homeProductModel,
-                                )
-                              ),
-                            Positioned(
-                              top: 70,
-                              left: 10,
-                              child: Text( "\$${model.price.toStringAsFixed(2)}",
-                                style: AppThemes.homeProductPrice,
-                                )
-                              ),
-                            Positioned(
-                              right: 15,
-                              top: 50,
-                              child: RotationTransition(
-                                turns: const AlwaysStoppedAnimation(-30 / 360),
-                                child: SizedBox(
-                                  width: 220,
-                                  height: 220,
-                                  child: Image(image: AssetImage(model.imgAddress)),
                                 ),
-                                ),
+                              ],
+                            )),
+                        Positioned(
+                            top: 40,
+                            left: 10,
+                            child: Text(
+                              model.model,
+                              style: AppThemes.homeProductModel,
+                            )),
+                        Positioned(
+                            top: 70,
+                            left: 10,
+                            child: Text(
+                              "\$${model.price.toStringAsFixed(2)}",
+                              style: AppThemes.homeProductPrice,
+                            )),
+                        Positioned(
+                          right: 15,
+                          top: 50,
+                          child: RotationTransition(
+                            turns: const AlwaysStoppedAnimation(-30 / 360),
+                            child: SizedBox(
+                              width: 220,
+                              height: 220,
+                              child: Image(image: AssetImage(model.imgAddress)),
                             ),
-                            Positioned(
-                              bottom: 5,
-                              left: 160,
-                              child: IconButton(
-                                onPressed: () {}, 
-                                icon: const FaIcon(
-                                  size: 25,
-                                  color: Colors.white,
-                                  FontAwesomeIcons.circleArrowRight,
-                                  ),
-                                )),        
-                          ],
+                          ),
                         ),
-                      ),
-                    );
-                  }),
-              )
-            ],
-          );
+                        Positioned(
+                            bottom: 5,
+                            left: 160,
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const FaIcon(
+                                size: 25,
+                                color: Colors.white,
+                                FontAwesomeIcons.circleArrowRight,
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        )
+      ],
+    );
   }
 
   Widget _categoryView(Size size) {
