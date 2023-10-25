@@ -49,8 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         Positioned(
+                          top: 0,
                           left: 4,
                           child: Container(
                             width: size.width / 13,
@@ -68,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Positioned(
+                          top: 0,
                           right: 1,
                           child: IconButton(
                             onPressed: (){}, 
@@ -78,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ), 
                         Positioned(
-                          top: 40,
+                          top: 45,
                           child: RotationTransition(
                             turns: const AlwaysStoppedAnimation(-20 / 360),
                             child: Hero(
@@ -91,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             )
                           ), 
                          Positioned(
-                          bottom: 35,
+                          bottom: 30,
                           left: 45,
                           child: SizedBox(
                             width: size.width / 4,
@@ -103,7 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                             ),
                           )
-                          )    
+                          ),
+                        Positioned(
+                          bottom: 10,
+                          child: Text(
+                            "\$${model.price.toStringAsFixed(2)}",
+                            style: AppThemes.homeGridPrice,
+                            ),
+                          ),      
                       ],
                     ),
                   );
