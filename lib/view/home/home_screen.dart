@@ -55,7 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const DetailScreen()));
+                        builder: (context) => DetailScreen(
+                              model: model,
+                              isComeFromSection: true,
+                            )));
               },
               child: Container(
                 margin: const EdgeInsets.all(10),
@@ -208,7 +211,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const DetailScreen()));
+                            builder: (context) => DetailScreen(
+                                  model: model,
+                                  isComeFromSection: false,
+                                )));
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(
