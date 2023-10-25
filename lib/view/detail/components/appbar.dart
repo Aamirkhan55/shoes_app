@@ -18,7 +18,7 @@ PreferredSize? customAppBarDe(ctx) {
         },
         icon: Icon(
           Icons.arrow_back,
-          color: AppConstantsColor.darkTextColor,
+          color: AppConstantsColor.lightTextColor,
         ),
       ),
       actions: [

@@ -6,47 +6,112 @@ import 'package:shoes_app/view/detail/components/appbar.dart';
 class DetailScreen extends StatelessWidget {
   final ShoeModel model;
   final bool isComeFromSection;
-  const DetailScreen({super.key, required this.model, required this.isComeFromSection});
+  const DetailScreen(
+      {super.key, required this.model, required this.isComeFromSection});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     return SafeArea(
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        backgroundColor: AppConstantsColor.backgroundColor,
-        appBar: customAppBarDe(context),
-        body: SizedBox(
-          width: size.width,
-          height: size.height * 1.1,
-          child: Column(
-            children: [
-               Positioned(
-                 right: 80,
-                 bottom: 20,
-                 child: Container(
-                  width: size.width,
-                  height: size.height / 2.3,
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: 1000,
-                        height: size.height/  2.2,
-                        decoration: BoxDecoration(
+        child: Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: AppConstantsColor.backgroundColor,
+      appBar: customAppBarDe(context),
+      body: SizedBox(
+        width: size.width,
+        height: size.height * 1.1,
+        child: Column(
+          children: [
+            SizedBox(
+              width: size.width,
+              height: size.height / 2.3,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 60,
+                    bottom: 20,
+                    child: Container(
+                      width: size.width,
+                      height: size.height / 2.2,
+                      decoration: BoxDecoration(
                           color: model.modelColor,
                           borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(1500),
-                            bottomRight: Radius.circular(100)
-                          )
-                        ),
-                      )
-                    ],
+                              bottomLeft: Radius.circular(1500),
+                              bottomRight: Radius.circular(100))),
+                    ),
                   ),
-                             ),
-               )
-            ],
-          ),
+                  Positioned(
+                    top: 90,
+                    left: 50,
+                    child: Hero(
+                      tag: isComeFromSection ? model.model : model.imgAddress,
+                      child: RotationTransition(
+                        turns: const AlwaysStoppedAnimation(-25 / 360),
+                        child: SizedBox(
+                          width: size.width / 1.3,
+                          height: size.height / 4.3,
+                          child: Image(image: AssetImage(model.imgAddress)),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              width: size.width,
+              height: size.height * 0.1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(
+                    4,
+                    (index) => index == 3
+                        ? Container(
+                            padding: const EdgeInsets.all(2),
+                            width: size.width / 5,
+                            height: size.height / 14,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              image: DecorationImage(
+                                  image: AssetImage(model.imgAddress),
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.grey.withOpacity(1),
+                                    BlendMode.darken,
+                                  )),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.play_circle_fill_outlined,
+                                color: AppConstantsColor.lightTextColor,
+                                size: 25,
+                              ),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 10),
+                            child: roundedImage(size.width, size.height))),
+              ),
+            )
+          ],
         ),
-      ));
+      ),
+    ));
+  }
+
+  roundedImage(width, height) {
+    return Container(
+      padding: const EdgeInsets.all(2),
+      width: width / 5,
+      height: height / 14,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.grey[300],
+      ),
+      child: Image(
+        image: AssetImage(model.imgAddress),
+      ),
+    );
   }
 }
