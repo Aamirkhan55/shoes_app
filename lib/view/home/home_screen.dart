@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shoes_app/data/dummy_data.dart';
 import 'package:shoes_app/model/shoe_model.dart';
 import 'package:shoes_app/theme/custom_app_theme.dart';
@@ -114,7 +115,41 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ],
                                 )
-                                )
+                                ),
+                              Positioned(
+                                top: 40,
+                                left: 10,
+                                child: Text(
+                                  model.model,
+                                  style: AppThemes.homeProductModel,
+                                  )
+                                ),
+                              Positioned(
+                                top: 70,
+                                left: 10,
+                                child: Text( "\$${model.price.toStringAsFixed(2)}",
+                                  style: AppThemes.homeProductPrice,
+                                  )
+                                ),
+                              Positioned(
+                                right: 15,
+                                top: 50,
+                                child: RotationTransition(
+                                  turns: const AlwaysStoppedAnimation(-30 / 360),
+                                  child: SizedBox(
+                                    width: 220,
+                                    height: 220,
+                                    child: Image(image: AssetImage(model.imgAddress)),
+                                  ),
+                                  ),
+                              ),
+                              Positioned(
+                                bottom: 10,
+                                left: 150,
+                                child: IconButton(
+                                  onPressed: () {}, 
+                                  icon: const FaIcon(FontAwesomeIcons.circleArrowRight)
+                                  )),        
                             ],
                           ),
                         ),
