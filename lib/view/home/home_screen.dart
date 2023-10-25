@@ -31,29 +31,83 @@ class _HomeScreenState extends State<HomeScreen> {
               height: size.height * 0.01,
             ),
             _mainShoeListView(size),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'More',
-                    style: AppThemes.homeMoreText,
+            _moreTextIcon(),
+            Container(
+              width: size.width,
+              height: size.height * 0.28,
+              color: Colors.teal,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemCount: availableShoes.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.all(10),
+                    width: size.width * 0.5,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  IconButton(
-                    onPressed: () {}, 
-                    icon: const Icon(
-                      CupertinoIcons.arrow_right,
-                      size: 30,
-                      )
-                    )  
-                ],
-              ),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          left: 4,
+                          child: Container(
+                            width: size.width / 13,
+                            height: size.height / 10,
+                            color: Colors.red,
+                            child: const RotatedBox(
+                              quarterTurns: -1,
+                              child: Center(
+                                child: Text(
+                                  'NEW',
+                                  style: AppThemes.homeGridNewText,
+                                  ),
+                              ),
+                              ),
+                          ),
+                        ),
+                        Positioned(
+                          right: 1,
+                          child: IconButton(
+                            onPressed: (){}, 
+                            icon: const Icon(
+                              Icons.favorite_border,
+                              color: AppConstantsColor.darkTextColor,
+                              )
+                            ),
+                          )
+                      ],
+                    ),
+                  );
+                }),
             )
           ],
         ),
       ),
     );
+  }
+
+  Padding _moreTextIcon() {
+    return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'More',
+                  style: AppThemes.homeMoreText,
+                  ),
+                IconButton(
+                  onPressed: () {}, 
+                  icon: const Icon(
+                    CupertinoIcons.arrow_right,
+                    size: 30,
+                    )
+                  )  
+              ],
+            ),
+          );
   }
 
   Row _mainShoeListView(Size size) {
