@@ -4,12 +4,18 @@ import 'package:shoes_app/theme/custom_app_theme.dart';
 import 'package:shoes_app/utils/constants.dart';
 import 'package:shoes_app/view/detail/components/appbar.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final ShoeModel model;
   final bool isComeFromSection;
   const DetailScreen(
       {super.key, required this.model, required this.isComeFromSection});
 
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  bool _isCounterySelected = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -39,18 +45,7 @@ class DetailScreen extends StatelessWidget {
                   _productNameAndPrice(),
                   _productInfo(size.width, size.height),
                   _moreDetailsText(size.width, size.height),
-                  const Row(
-                    children: [
-                      Text(
-                        'Size',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: AppConstantsColor.darkTextColor,
-                        ),
-                        ),
-                    ],
-                  )
+                  _sizeAndCategorySelectedSection(size),
                 ],
               ),
             )
@@ -60,11 +55,76 @@ class DetailScreen extends StatelessWidget {
     ));
   }
 
+  Widget _sizeAndCategorySelectedSection(Size size) {
+    return Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Size',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: AppConstantsColor.darkTextColor,
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.35,
+                        height: size.height * 0.05,
+                        child: Row(
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isCounterySelected = false;
+                                  });
+                                },
+                                child: Text(
+                                  'Uk',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: _isCounterySelected
+                                        ? FontWeight.w400
+                                        : FontWeight.bold,
+                                    color: _isCounterySelected
+                                        ? Colors.grey
+                                        : AppConstantsColor.darkTextColor,
+                                  ),
+                                ),
+                                ),
+                            TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isCounterySelected = true;
+                                  });
+                                },
+                                child: Text(
+                                  'USA',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: _isCounterySelected
+                                        ? FontWeight.w400
+                                        : FontWeight.bold,
+                                    color: !_isCounterySelected
+                                        ? Colors.grey
+                                        : AppConstantsColor.darkTextColor,
+                                  ),
+                                ),
+                                ),    
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+  }
+
   _productNameAndPrice() {
     return Row(
       children: [
         Text(
-          model.model,
+          widget.model.model,
           style: const TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.bold,
@@ -73,7 +133,7 @@ class DetailScreen extends StatelessWidget {
         ),
         Expanded(child: Container()),
         Text(
-          "\$${model.price.toStringAsFixed(2)}",
+          "\$${widget.model.price.toStringAsFixed(2)}",
           style: AppThemes.detailsProductPrice,
         )
       ],
@@ -96,7 +156,7 @@ class DetailScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
                       image: DecorationImage(
-                          image: AssetImage(model.imgAddress),
+                          image: AssetImage(widget.model.imgAddress),
                           colorFilter: ColorFilter.mode(
                             Colors.grey.withOpacity(1),
                             BlendMode.darken,
@@ -132,7 +192,7 @@ class DetailScreen extends StatelessWidget {
               width: size.width,
               height: size.height / 2.2,
               decoration: BoxDecoration(
-                  color: model.modelColor,
+                  color: widget.model.modelColor,
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(1500),
                       bottomRight: Radius.circular(100))),
@@ -142,13 +202,15 @@ class DetailScreen extends StatelessWidget {
             top: 90,
             left: 50,
             child: Hero(
-              tag: isComeFromSection ? model.model : model.imgAddress,
+              tag: widget.isComeFromSection
+                  ? widget.model.model
+                  : widget.model.imgAddress,
               child: RotationTransition(
                 turns: const AlwaysStoppedAnimation(-25 / 360),
                 child: SizedBox(
                   width: size.width / 1.3,
                   height: size.height / 4.3,
-                  child: Image(image: AssetImage(model.imgAddress)),
+                  child: Image(image: AssetImage(widget.model.imgAddress)),
                 ),
               ),
             ),
@@ -168,7 +230,7 @@ class DetailScreen extends StatelessWidget {
         color: Colors.grey[300],
       ),
       child: Image(
-        image: AssetImage(model.imgAddress),
+        image: AssetImage(widget.model.imgAddress),
       ),
     );
   }
@@ -186,14 +248,14 @@ class DetailScreen extends StatelessWidget {
       ),
     );
   }
-  
- Widget _moreDetailsText(width, heigth) {
-  return const Padding(
-    padding:EdgeInsets.only(top: 3),
-    child: Text(
-      'MORE DETAILS',
-      style: AppThemes.detailsMoreText,
+
+  Widget _moreDetailsText(width, heigth) {
+    return const Padding(
+      padding: EdgeInsets.only(top: 3),
+      child: Text(
+        'MORE DETAILS',
+        style: AppThemes.detailsMoreText,
       ),
-  );
- }
+    );
+  }
 }
