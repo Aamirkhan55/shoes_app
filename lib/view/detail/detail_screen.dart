@@ -37,6 +37,7 @@ class DetailScreen extends StatelessWidget {
                 children: [
                   _productNameAndPrice(),
                   _productInfo(size.width, size.height),
+                  _moreDetailsText(size.width, size.height),
                 ],
               ),
             )
@@ -172,4 +173,17 @@ class DetailScreen extends StatelessWidget {
       ),
     );
   }
+  
+ Widget _moreDetailsText(width, heigth) {
+  return Container(
+    height: heigth / 26,
+    padding: const EdgeInsets.only(right: 280),
+    child: const FittedBox(
+      child: Text(
+        'MORE DETAILS',
+        style: AppThemes.detailsMoreText,
+        ),
+    ),
+  );
+ }
 }
