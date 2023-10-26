@@ -34,10 +34,23 @@ class DetailScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _productNameAndPrice(),
                   _productInfo(size.width, size.height),
                   _moreDetailsText(size.width, size.height),
+                  const Row(
+                    children: [
+                      Text(
+                        'Size',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: AppConstantsColor.darkTextColor,
+                        ),
+                        ),
+                    ],
+                  )
                 ],
               ),
             )
@@ -175,15 +188,12 @@ class DetailScreen extends StatelessWidget {
   }
   
  Widget _moreDetailsText(width, heigth) {
-  return Container(
-    height: heigth / 26,
-    padding: const EdgeInsets.only(right: 280),
-    child: const FittedBox(
-      child: Text(
-        'MORE DETAILS',
-        style: AppThemes.detailsMoreText,
-        ),
-    ),
+  return const Padding(
+    padding:EdgeInsets.only(top: 3),
+    child: Text(
+      'MORE DETAILS',
+      style: AppThemes.detailsMoreText,
+      ),
   );
  }
 }
