@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shoes_app/model/shoe_model.dart';
 import 'package:shoes_app/theme/custom_app_theme.dart';
 import 'package:shoes_app/utils/constants.dart';
@@ -46,6 +47,43 @@ class _DetailScreenState extends State<DetailScreen> {
                   _productInfo(size.width, size.height),
                   _moreDetailsText(size.width, size.height),
                   _sizeAndCategorySelectedSection(size),
+                  Container(
+                    width: size.width,
+                    height: size.height * 0.1,
+                    color: Colors.red,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: size.width / 4.5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1
+                            ),
+                          ),
+                          child: const Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Try It',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  ),
+                                SizedBox(width: 10),
+                                RotatedBox(
+                                  quarterTurns: -1,
+                                  child: FaIcon(FontAwesomeIcons.shoePrints), 
+                                  ),  
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             )
