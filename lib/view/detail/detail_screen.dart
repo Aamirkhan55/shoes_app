@@ -52,27 +52,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     _moreDetailsText(size.width, size.height),
                     _sizeAndCategorySelectedSection(size),
                     _bottomSizeSelection(size),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: MaterialButton(
-                        minWidth: size.width / 1.2,
-                        height: size.height / 15,
-                        color: AppConstantsColor.materialButtonColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Add To Bag',
-                          style: TextStyle(
-                            color: AppConstantsColor.lightTextColor
-                          ),
-                          ),
-                        )
-                      ),
-                    )
+                    _addToBagButton(size),
                   ],
                 ),
               )
@@ -81,6 +61,30 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ),
     ));
+  }
+
+  Widget _addToBagButton(Size size) {
+    return Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: MaterialButton(
+                      minWidth: size.width / 1.2,
+                      height: size.height / 15,
+                      color: widget.model.modelColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'Add To Bag',
+                        style: TextStyle(
+                          color: AppConstantsColor.lightTextColor
+                        ),
+                        ),
+                      )
+                    ),
+                  );
   }
 
   Widget _bottomSizeSelection(Size size) {
