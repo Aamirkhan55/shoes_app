@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_app/theme/custom_app_theme.dart';
 
-
 class EmptyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,11 +15,10 @@ class EmptyList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("No shoes added!", style: AppThemes.bagEmptyListTitle),
-             Text(
-                "Once you have added, come back:)",
-                style: AppThemes.bagEmptyListSubTitle,
-              ),
-            
+            Text(
+              "Once you have added, come back:)",
+              style: AppThemes.bagEmptyListSubTitle,
+            ),
           ],
         ),
       ),
