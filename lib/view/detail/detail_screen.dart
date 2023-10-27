@@ -30,30 +30,54 @@ class _DetailScreenState extends State<DetailScreen> {
       body: SizedBox(
         width: size.width,
         height: size.height * 1.1,
-        child: Column(
-          children: [
-            _topProducteImgBg(size),
-            _morePicOfProduct(size),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Divider(
-                thickness: 2,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              _topProducteImgBg(size),
+              _morePicOfProduct(size),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: Divider(
+                  thickness: 2,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _productNameAndPrice(),
-                  _productInfo(size.width, size.height),
-                  _moreDetailsText(size.width, size.height),
-                  _sizeAndCategorySelectedSection(size),
-                  _bottomSizeSelection(size),
-                ],
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _productNameAndPrice(),
+                    _productInfo(size.width, size.height),
+                    _moreDetailsText(size.width, size.height),
+                    _sizeAndCategorySelectedSection(size),
+                    _bottomSizeSelection(size),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: MaterialButton(
+                        minWidth: size.width / 1.2,
+                        height: size.height / 15,
+                        color: AppConstantsColor.materialButtonColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          'Add To Bag',
+                          style: TextStyle(
+                            color: AppConstantsColor.lightTextColor
+                          ),
+                          ),
+                        )
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     ));
