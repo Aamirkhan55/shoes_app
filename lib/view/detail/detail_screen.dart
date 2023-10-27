@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shoes_app/data/dummy_data.dart';
 import 'package:shoes_app/model/shoe_model.dart';
 import 'package:shoes_app/theme/custom_app_theme.dart';
 import 'package:shoes_app/utils/constants.dart';
@@ -17,6 +18,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   bool _isCounterySelected = false;
+  int? _isSelectedSize;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -47,43 +49,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   _productInfo(size.width, size.height),
                   _moreDetailsText(size.width, size.height),
                   _sizeAndCategorySelectedSection(size),
-                  Container(
-                    width: size.width,
-                    height: size.height * 0.1,
-                    color: Colors.red,
-                    child: Row(
-                      children: [
-                        Container(
-                          width: size.width / 4.5,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: Colors.grey,
-                              width: 1
-                            ),
-                          ),
-                          child: const Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Try It',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  ),
-                                SizedBox(width: 10),
-                                RotatedBox(
-                                  quarterTurns: -1,
-                                  child: FaIcon(FontAwesomeIcons.shoePrints), 
-                                  ),  
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _bottomSizeSelection(size),
                 ],
               ),
             )
@@ -91,6 +57,88 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ),
     ));
+  }
+
+  Widget _bottomSizeSelection(Size size) {
+    return SizedBox(
+                  width: size.width,
+                  height: size.height * 0.07,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: size.width / 4.5,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1
+                          ),
+                        ),
+                        child: const Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Try It',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                ),
+                              SizedBox(width: 10),
+                              RotatedBox(
+                                quarterTurns: -1,
+                                child: FaIcon(FontAwesomeIcons.shoePrints), 
+                                ),  
+                            ],
+                          ),
+                        ),
+                      ),
+                     SizedBox(
+                      width: size.width * 0.7,
+                      child: ListView.builder(
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _isSelectedSize = index;
+                              });
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                right: 5,
+                                left: 5,
+                                ),
+                              width: size.width * 0.15,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: _isSelectedSize == index ? Colors.black : Colors.grey,
+                                  width: 1.5,
+                                ),
+                                color: _isSelectedSize == index ?  Colors.black : AppConstantsColor.backgroundColor ,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  sizes[index].toString(),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                     color: _isSelectedSize == index ? Colors.white : Colors.grey, 
+                                  ),
+                                  ),
+                              ),
+                            ),
+                          );
+                        }
+                        ),
+                     ) 
+                    ],
+                  ),
+                );
   }
 
   Widget _sizeAndCategorySelectedSection(Size size) {
