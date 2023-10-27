@@ -2,6 +2,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_app/utils/constants.dart';
+import 'package:shoes_app/view/bag/bag_screen.dart';
 import 'package:shoes_app/view/home/home_screen.dart';
 
 class NavigatorBar extends StatefulWidget {
@@ -18,15 +19,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
 
   final List<Widget> _screen = [
     const HomeScreen(),
-    Container(
-      color: Colors.amber,
-    ),
-    Container(
-      color: Colors.teal,
-    ),
-    Container(
-      color: Colors.cyan,
-    ),
+    const BagScreen(),
   ];
 
   void onItemTep(int index) {
