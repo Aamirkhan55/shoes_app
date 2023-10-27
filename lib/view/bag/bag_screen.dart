@@ -27,11 +27,19 @@ class _BagScreenState extends State<BagScreen> {
           child: Column(
             children: [
               _bagAppBar(width, height),
-              Container(
-                width: width,
-                height: height * 0.8,
-                color: Colors.red,
-                child: ListView.builder(
+              _mainProductList(width, height),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _mainProductList(double width, double height) {
+    return SizedBox(
+              width: width,
+              height: height * 0.8,
+              child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   itemCount: itemsOnBag.length,
@@ -47,43 +55,106 @@ class _BagScreenState extends State<BagScreen> {
                             width: width * 0.4,
                             child: Stack(
                               children: [
+                                Container(
+                                  width: width * 0.4,
+                                  margin: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: currentBagItem.modelColor
+                                        .withOpacity(0.9),
+                                  ),
+                                ),
                                 Positioned(
                                   right: 2,
-                                  child: Container(
-                                    width: width / 0.4,
-                                    margin: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.grey[350],
+                                  bottom: 15,
+                                  child: RotationTransition(
+                                    turns: const AlwaysStoppedAnimation(
+                                        -40 / 360),
+                                    child: SizedBox(
+                                      width: 150,
+                                      height: 150,
+                                      child: Image(
+                                          image: AssetImage(
+                                              currentBagItem.imgAddress)),
                                     ),
                                   ),
                                 ),
-                              Positioned(
-                                right: 2,
-                                bottom: 15,
-                                child: RotationTransition(
-                                  turns: const AlwaysStoppedAnimation(-40 / 360),
-                                  child: SizedBox(
-                                    width: 150,
-                                    height: 150,
-                                    child: Image(image: AssetImage(currentBagItem.imgAddress)),
-                                  ),
-                                  )
-                                )
                               ],
                             ),
-                          )
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                currentBagItem.model,
+                                style: AppThemes.bagProductModel,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                "\$${currentBagItem.price}",
+                                style: AppThemes.bagProductPrice,
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Todo
+                                    },
+                                    child: Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        color: Colors.grey[350],
+                                      ),
+                                      child: const Center(
+                                        child: Icon(
+                                          Icons.remove,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                 const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    "1",
+                                    style: AppThemes.bagProductNumOfShoe,
+                                    ),
+                                  ),
+                                 GestureDetector(
+                                    onTap: () {
+                                      // Todo
+                                    },
+                                    child: Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        color: Colors.grey[350],
+                                      ),
+                                      child: const Center(
+                                        child: Icon(
+                                          Icons.add,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ),
+                                  ), 
+                                ],
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     );
-                  }
-                  ),
-              ),
-              ],
-          ),
-        ),
-      ),
-    );
+                  }),
+            );
   }
 
   Widget _bagAppBar(double width, double height) {

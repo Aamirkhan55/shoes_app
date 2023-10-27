@@ -63,7 +63,15 @@ final List<ShoeModel> availableShoes = [
   ),
 ];
 
-List<ShoeModel> itemsOnBag = [];
+List<ShoeModel> itemsOnBag = [
+  ShoeModel(
+    name: "NIKE",
+    model: "AIR-JORDAN LOW",
+    price: 150.00,
+    imgAddress: "assets/images/nike6.png",
+    modelColor: const Color(0xffE2E3E5),
+  ),
+];
 
 final List<UserStatus> userStatus = [
   UserStatus(
