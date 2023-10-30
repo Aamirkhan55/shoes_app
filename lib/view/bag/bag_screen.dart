@@ -28,6 +28,20 @@ class _BagScreenState extends State<BagScreen> {
             children: [
               _bagAppBar(width, height),
               _mainProductList(width, height),
+              SizedBox(
+                width: width,
+                height: height / 7,
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'TOTAL',
+                      style: AppThemes.bagTotalPrice,
+                      )
+                  ],
+                ),
+              ),
+
             ],
           ),
         ),
@@ -35,10 +49,29 @@ class _BagScreenState extends State<BagScreen> {
     );
   }
 
+  materialButton (width, height) {
+    return MaterialButton(
+      minWidth: width / 1.2,
+      height: height / 15,
+      color: AppConstantsColor.materialButtonColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      onPressed: () {
+      },
+      child: const Text(
+        'NEXT',
+        style: TextStyle(
+          color: AppConstantsColor.lightTextColor,
+        ),
+        ),
+      );
+  }
+
   Widget _mainProductList(double width, double height) {
-    return SizedBox(
+    return SizedBox( 
               width: width,
-              height: height * 0.8,
+              height: height * 0.6,
               child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
