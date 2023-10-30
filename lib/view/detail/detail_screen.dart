@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shoes_app/data/dummy_data.dart';
 import 'package:shoes_app/model/shoe_model.dart';
 import 'package:shoes_app/theme/custom_app_theme.dart';
+import 'package:shoes_app/utils/app_method.dart';
 import 'package:shoes_app/utils/constants.dart';
 import 'package:shoes_app/view/detail/components/appbar.dart';
 
@@ -75,7 +76,9 @@ class _DetailScreenState extends State<DetailScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        AppMethods.addToCart(widget.model, context);
+                      },
                       child: const Text(
                         'Add To Bag',
                         style: TextStyle(
