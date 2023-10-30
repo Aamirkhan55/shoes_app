@@ -99,7 +99,7 @@ class _BagScreenState extends State<BagScreen> {
                           margin: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: currentBagItem.modelColor.withOpacity(0.9),
+                            color: currentBagItem.modelColor.withOpacity(0.6),
                           ),
                         ),
                         Positioned(
